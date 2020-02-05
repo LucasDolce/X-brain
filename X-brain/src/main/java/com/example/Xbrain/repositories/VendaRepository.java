@@ -10,6 +10,6 @@ import java.util.List;
 
 public interface VendaRepository extends JpaRepository <Venda, Long> {
 
-   @Query(value = "SELECT VENDEDOR_NOME, COUNT(VENDA_VENDEDOR),COUNT(VENDA_VENDEDOR)/DATEDIFF(day,:dataInicial,:dataFinal) FROM VENDA, VENDEDOR WHERE VENDEDOR_ID = VENDA_VENDEDOR AND VENDA_DATA BETWEEN :dataInicial AND :dataFinal GROUP BY VENDEDOR_ID", nativeQuery = true)
+   @Query(value = "SELECT VENDEDOR_NOME, COUNT(VENDA_VENDEDOR),COUNT(VENDA_VENDEDOR)/DATEDIFF(day,:dataInicial,:dataFinal) FROM VENDA, VENDEDOR WHERE VENDA_DATA BETWEEN :dataInicial AND :dataFinal AND VENDEDOR_ID = VENDA_VENDEDOR GROUP BY VENDEDOR_ID", nativeQuery = true)
    List<Object[]> findEntreDatas(@PathVariable(value = "dataInicial") Date dataInicial, @PathVariable(value = "dataFinal") Date dataFinal);
 }
